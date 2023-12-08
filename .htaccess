@@ -1,0 +1,45 @@
+
+# BEGIN WordPress
+# As diretrizes (linhas) entre "BEGIN WordPress" e "END WordPress" são
+# geradas dinamicamente e só devem ser modificadas através de filtros do WordPress.
+# Quaisquer alterações nas diretivas entre esses marcadores serão sobrescritas.
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+RewriteBase /sites-lucas/wordpress/
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /sites-lucas/wordpress/index.php [L]
+</IfModule>
+
+# END WordPress
+# BEGIN WP Cloudflare Super Page Cache
+# As diretrizes (linhas) entre "BEGIN WP Cloudflare Super Page Cache" e "END WP Cloudflare Super Page Cache" são
+# geradas dinamicamente e só devem ser modificadas através de filtros do WordPress.
+# Quaisquer alterações nas diretivas entre esses marcadores serão sobrescritas.
+<IfModule mod_expires.c>
+ExpiresActive on
+ExpiresByType application/xml "access plus 0 seconds"
+ExpiresByType text/xsl "access plus 0 seconds"
+</IfModule>
+<FilesMatch "\.(xml|xsl)$">
+<IfModule mod_headers.c>
+Header set Cache-Control "no-cache, no-store, must-revalidate, max-age=0"
+</IfModule>
+</FilesMatch>
+<FilesMatch "robots\.txt">
+<IfModule mod_headers.c>
+Header set Cache-Control "no-cache, no-store, must-revalidate, max-age=0"
+</IfModule>
+</FilesMatch>
+<IfModule mod_rewrite.c>
+RewriteCond %{REQUEST_URI} ^(.*)?/sites-lucas/wordpress/wp-content/wp-cloudflare-super-page-cache/localhost/debug.log(.*)$
+RewriteRule ^(.*)$ - [F]
+</IfModule>
+<FilesMatch "wp-cron.php">
+<IfModule mod_headers.c>
+Header set Cache-Control "no-cache, no-store, must-revalidate, max-age=0"
+</IfModule>
+</FilesMatch>
+# END WP Cloudflare Super Page Cache

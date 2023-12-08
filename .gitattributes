@@ -1,0 +1,2 @@
+*.psd filter=lfs diff=lfs merge=lfs -text
+wp-content/ai1wm-backups/localhost-sites-lucas-wordpress-20231207-172105-kesys7.wpress filter=lfs diff=lfs merge=lfs -text
